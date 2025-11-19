@@ -2,106 +2,146 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Senior Design – MRI Pelvic Phantom for Adaptive Radiotherapy</title>
+  <title>MRI Pelvic Phantom for Adaptive Radiotherapy – ECEN 403</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <!-- Simple, clean styling -->
   <style>
     :root {
-      --primary: #500000;  /* Aggie maroon-ish */
-      --accent: #8c1515;
-      --bg: #f7f7f7;
-      --card-bg: #ffffff;
+      --primary: #500000;   /* Aggie maroon tone */
+      --primary-soft: #7a2626;
+      --accent: #f5b041;
+      --bg: #f5f5f7;
+      --bg-alt: #ffffff;
       --text-main: #222222;
-      --text-muted: #666666;
-      --border: #dddddd;
+      --text-muted: #6b7280;
+      --border: #e0e0e5;
+      --shadow-soft: 0 16px 40px rgba(0, 0, 0, 0.06);
+      --radius-lg: 1.5rem;
     }
 
     * {
-      box-sizing: border-box;
       margin: 0;
       padding: 0;
+      box-sizing: border-box;
     }
 
     body {
       font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      background: var(--bg);
+      background: radial-gradient(circle at top, #fdf4f4 0, #f5f5f7 45%, #f5f5f7 100%);
       color: var(--text-main);
       line-height: 1.6;
     }
 
-    /* Top navigation */
+    a {
+      color: inherit;
+    }
+
+    /* ------- NAVBAR ------- */
     header {
-      background: var(--primary);
-      color: white;
-      padding: 1rem 2rem;
       position: sticky;
       top: 0;
       z-index: 100;
+      backdrop-filter: blur(12px);
+      background: linear-gradient(to right, rgba(80,0,0,0.97), rgba(122,38,38,0.97));
+      color: #fff;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.15);
     }
 
-    .nav-container {
-      max-width: 1100px;
+    .nav-inner {
+      max-width: 1180px;
       margin: 0 auto;
+      padding: 0.75rem 1.5rem;
       display: flex;
-      justify-content: space-between;
       align-items: center;
+      justify-content: space-between;
       gap: 1rem;
       flex-wrap: wrap;
     }
 
-    .logo {
+    .brand {
       font-weight: 700;
-      font-size: 1.1rem;
-      letter-spacing: 0.04em;
+      letter-spacing: 0.08em;
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .brand span.logo-pill {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 999px;
+      padding: 0.15rem 0.6rem;
+      background: rgba(255,255,255,0.14);
+      font-size: 0.7rem;
+    }
+
+    nav {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      font-size: 0.9rem;
     }
 
     nav a {
-      color: white;
       text-decoration: none;
-      margin-left: 1.2rem;
-      font-size: 0.95rem;
+      color: #f9fafb;
+      padding: 0.25rem 0.6rem;
+      border-radius: 999px;
+      transition: background 0.15s ease, transform 0.15s ease;
     }
 
     nav a:hover {
-      text-decoration: underline;
+      background: rgba(255,255,255,0.12);
+      transform: translateY(-1px);
     }
 
-    /* Main layout */
+    /* ------- MAIN LAYOUT ------- */
     main {
-      max-width: 1100px;
-      margin: 1.5rem auto 3rem auto;
+      max-width: 1180px;
+      margin: 1.7rem auto 3rem auto;
       padding: 0 1.5rem;
     }
 
     section {
-      margin-bottom: 2.5rem;
-    }
-
-    h1, h2, h3 {
-      color: var(--primary);
-      margin-bottom: 0.8rem;
+      margin-bottom: 3rem;
     }
 
     h1 {
-      font-size: 1.9rem;
+      font-size: 2.1rem;
+      color: var(--primary);
+      letter-spacing: 0.04em;
     }
 
     h2 {
-      font-size: 1.4rem;
-      margin-top: 1rem;
-      border-bottom: 2px solid var(--border);
-      padding-bottom: 0.3rem;
+      font-size: 1.45rem;
+      color: var(--primary-soft);
+      margin-bottom: 0.8rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    h2::before {
+      content: "";
+      display: inline-block;
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+      background: var(--accent);
     }
 
     h3 {
-      font-size: 1.15rem;
-      margin-top: 1rem;
+      font-size: 1.1rem;
+      margin-bottom: 0.4rem;
+      color: #27272a;
     }
 
     p {
-      margin-bottom: 0.6rem;
       font-size: 0.98rem;
+      margin-bottom: 0.5rem;
     }
 
     .muted {
@@ -109,52 +149,236 @@
       font-size: 0.9rem;
     }
 
+    /* ------- HERO ------- */
     .hero {
-      background: var(--card-bg);
-      border-radius: 0.75rem;
-      padding: 1.5rem 1.5rem 1.2rem 1.5rem;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.04);
-      margin-bottom: 2rem;
+      display: grid;
+      grid-template-columns: minmax(0, 2.1fr) minmax(0, 1.4fr);
+      gap: 1.7rem;
+      background: linear-gradient(135deg, #ffffff, #fff7ef);
+      border-radius: var(--radius-lg);
+      padding: 1.7rem 1.6rem 1.5rem 1.6rem;
+      box-shadow: var(--shadow-soft);
+      border: 1px solid rgba(255,255,255,0.8);
     }
 
-    .hero-top {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-start;
-      gap: 1rem;
-      flex-wrap: wrap;
+    .hero-header {
+      margin-bottom: 0.8rem;
     }
 
-    .hero-tags {
-      text-align: right;
-    }
-
-    .tag {
-      display: inline-block;
-      background: var(--accent);
-      color: white;
-      padding: 0.25rem 0.6rem;
-      border-radius: 999px;
-      font-size: 0.8rem;
-      margin-left: 0.3rem;
-    }
-
-    .highlight-box {
-      background: #fff4f4;
-      border-left: 4px solid var(--accent);
-      padding: 0.8rem 0.9rem;
-      border-radius: 0.5rem;
-      margin-top: 0.8rem;
+    .hero-subtitle {
       font-size: 0.92rem;
+      color: var(--text-muted);
+      margin-top: 0.2rem;
     }
 
+    .hero-pill-row {
+      margin-top: 0.8rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      font-size: 0.78rem;
+    }
+
+    .pill {
+      border-radius: 999px;
+      padding: 0.2rem 0.7rem;
+      border: 1px solid rgba(80,0,0,0.12);
+      background: rgba(255,255,255,0.7);
+      color: var(--text-muted);
+      backdrop-filter: blur(6px);
+    }
+
+    .summary-box {
+      margin-top: 1rem;
+      padding: 0.9rem 1rem;
+      border-radius: 1rem;
+      background: #fef4e8;
+      border: 1px solid #f5d3a3;
+      font-size: 0.9rem;
+    }
+
+    .summary-box strong {
+      color: #92400e;
+    }
+
+    .hero-meta {
+      display: flex;
+      flex-direction: column;
+      gap: 0.9rem;
+      font-size: 0.9rem;
+    }
+
+    .meta-card {
+      background: #ffffff;
+      border-radius: 1rem;
+      padding: 0.9rem 1rem;
+      border: 1px solid #f1f1f5;
+    }
+
+    .meta-label {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.11em;
+      color: var(--text-muted);
+      margin-bottom: 0.25rem;
+    }
+
+    .meta-content strong {
+      font-size: 0.95rem;
+    }
+
+    .sponsor-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+    }
+
+    .sponsor-tag {
+      border-radius: 999px;
+      padding: 0.15rem 0.7rem;
+      background: #ecfdf3;
+      border: 1px solid #bbf7d0;
+      font-size: 0.8rem;
+      color: #15803d;
+    }
+
+    .timestamp {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      margin-top: 0.4rem;
+    }
+
+    /* ------- GRID / CARDS ------- */
     .grid-2 {
       display: grid;
-      grid-template-columns: 1.5fr 1fr;
-      gap: 1.5rem;
+      grid-template-columns: minmax(0, 1.6fr) minmax(0, 1.3fr);
+      gap: 1.3rem;
     }
 
-    @media (max-width: 800px) {
+    .card {
+      background: var(--bg-alt);
+      border-radius: 1.1rem;
+      padding: 1.1rem 1.2rem;
+      border: 1px solid var(--border);
+      box-shadow: 0 10px 25px rgba(15,23,42,0.03);
+    }
+
+    ul {
+      margin-left: 1.1rem;
+      font-size: 0.95rem;
+    }
+
+    li {
+      margin-bottom: 0.35rem;
+    }
+
+    .chip-row {
+      margin-top: 0.5rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+    }
+
+    .chip {
+      font-size: 0.78rem;
+      border-radius: 999px;
+      padding: 0.15rem 0.55rem;
+      border: 1px solid #e4e4e7;
+      background: #fafafa;
+      color: #4b5563;
+    }
+
+    /* ------- DOCUMENT TABLES ------- */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 0.6rem;
+      font-size: 0.9rem;
+    }
+
+    th, td {
+      padding: 0.45rem 0.6rem;
+      border-bottom: 1px solid #e5e7eb;
+      text-align: left;
+    }
+
+    th {
+      background: #f9fafb;
+      font-weight: 600;
+      font-size: 0.83rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: #6b7280;
+    }
+
+    tbody tr:nth-child(even) {
+      background: #fdfdfd;
+    }
+
+    a.doc-link {
+      color: var(--primary-soft);
+      font-weight: 500;
+      text-decoration: none;
+    }
+
+    a.doc-link:hover {
+      text-decoration: underline;
+    }
+
+    .section-note {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      margin-top: 0.4rem;
+    }
+
+    /* ------- TIMELINE ------- */
+    .timeline {
+      position: relative;
+      padding-left: 1.4rem;
+      margin-top: 0.5rem;
+    }
+
+    .timeline::before {
+      content: "";
+      position: absolute;
+      left: 0.35rem;
+      top: 0.1rem;
+      bottom: 0;
+      width: 2px;
+      background: linear-gradient(to bottom, #fec89a, #f97316);
+      opacity: 0.7;
+    }
+
+    .timeline-item {
+      position: relative;
+      margin-bottom: 0.9rem;
+    }
+
+    .timeline-dot {
+      position: absolute;
+      left: -0.02rem;
+      top: 0.25rem;
+      width: 9px;
+      height: 9px;
+      border-radius: 999px;
+      background: #f97316;
+      box-shadow: 0 0 0 3px #ffedd5;
+    }
+
+    .timeline-label {
+      font-size: 0.82rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: #9a3412;
+      margin-bottom: 0.1rem;
+    }
+
+    /* ------- RESPONSIVE ------- */
+    @media (max-width: 900px) {
+      .hero {
+        grid-template-columns: 1fr;
+      }
       .grid-2 {
         grid-template-columns: 1fr;
       }
@@ -163,353 +387,418 @@
       }
     }
 
-    .card {
-      background: var(--card-bg);
-      border-radius: 0.75rem;
-      padding: 1rem 1.2rem;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.04);
-      margin-top: 0.75rem;
-    }
-
-    ul {
-      margin-left: 1.2rem;
-      margin-bottom: 0.5rem;
-      font-size: 0.96rem;
-    }
-
-    li {
-      margin-bottom: 0.3rem;
-    }
-
-    /* Tables for documents */
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      margin-top: 0.75rem;
-      font-size: 0.92rem;
-    }
-
-    th, td {
-      border: 1px solid var(--border);
-      padding: 0.4rem 0.55rem;
-      text-align: left;
-    }
-
-    th {
-      background: #f0f0f0;
-    }
-
-    tbody tr:nth-child(even) {
-      background: #fafafa;
-    }
-
-    a.doc-link {
-      color: var(--accent);
-      text-decoration: none;
-      font-weight: 500;
-    }
-
-    a.doc-link:hover {
-      text-decoration: underline;
-    }
-
-    .updated {
-      font-size: 0.85rem;
-      color: var(--text-muted);
-      margin-top: 0.3rem;
-    }
-
     footer {
       text-align: center;
-      padding: 1.5rem 0;
-      font-size: 0.85rem;
+      padding: 1.5rem 0 2rem 0;
+      font-size: 0.82rem;
       color: var(--text-muted);
     }
-
-    .chip-row {
-      margin-top: 0.35rem;
-    }
-
-    .chip {
-      display: inline-block;
-      border-radius: 999px;
-      border: 1px solid var(--border);
-      padding: 0.1rem 0.55rem;
-      font-size: 0.8rem;
-      margin-right: 0.4rem;
-      margin-top: 0.2rem;
-      color: var(--text-muted);
-      background: #fcfcfc;
-    }
-
   </style>
 </head>
+
 <body>
 
-  <!-- NAVBAR -->
+  <!-- ===== NAVBAR ===== -->
   <header>
-    <div class="nav-container">
-      <div class="logo">
-        ECEN 403 Senior Design
+    <div class="nav-inner">
+      <div class="brand">
+        <span>MRI Pelvic Phantom</span>
+        <span class="logo-pill">ECEN 403 · 2025–2026</span>
       </div>
       <nav>
         <a href="#overview">Overview</a>
         <a href="#team">Team</a>
-        <a href="#design">Design</a>
+        <a href="#phantom-design">Phantom Design</a>
+        <a href="#software">Distortion Software</a>
+        <a href="#validation">Validation</a>
         <a href="#documents">Documents</a>
-        <a href="#timeline">Timeline & Updates</a>
+        <a href="#timeline">Timeline</a>
       </nav>
     </div>
   </header>
 
   <main>
-
-    <!-- HERO / TITLE SECTION -->
+    <!-- ===== HERO ===== -->
     <section id="home">
       <div class="hero">
-        <div class="hero-top">
-          <div>
+        <div>
+          <div class="hero-header">
             <h1>MRI Pelvic Phantom for Adaptive Radiotherapy</h1>
-            <p class="muted">ECEN 403 Senior Design Project · Texas A&amp;M University at Qatar</p>
+            <p class="hero-subtitle">
+              A senior design project integrating medical imaging hardware, MRI distortion physics,
+              and correction software to support adaptive radiotherapy workflows.
+            </p>
           </div>
-          <div class="hero-tags">
-            <span class="tag">Team #1</span>
-            <span class="tag">2025–2026</span>
+
+          <div class="hero-pill-row">
+            <span class="pill">Texas A&amp;M University at Qatar</span>
+            <span class="pill">Electrical &amp; Computer Engineering</span>
+            <span class="pill">Capstone · ECEN 403</span>
           </div>
-        </div>
 
-        <div class="highlight-box">
-          <strong>Project summary:</strong>
-          This project aims to design, build, and validate an MRI-compatible pelvic phantom to support
-          adaptive radiotherapy workflows. The phantom will be used to study geometric distortion,
-          image quality, and motion, and will be paired with a software pipeline for distortion
-          analysis and correction.
-        </div>
+          <div class="summary-box">
+            <strong>Project summary.</strong>
+            We are developing an MRI-compatible pelvic phantom that mimics realistic anatomy and motion.
+            By pairing this phantom with a dedicated image-processing pipeline, we aim to
+            quantify geometric distortion in MR images and evaluate correction strategies
+            for adaptive radiotherapy planning and verification.
+          </div>
 
-        <p class="updated">
-          Last updated: <!-- Update this date whenever you change the site --> November 19, 2025
-        </p>
-      </div>
-    </section>
-
-    <!-- OVERVIEW SECTION -->
-    <section id="overview">
-      <h2>Project Overview</h2>
-      <div class="grid-2">
-        <div>
-          <h3>Objective</h3>
-          <p>
-            The objective of this project is to develop a realistic pelvic phantom that can be scanned
-            on MRI systems and used to evaluate and improve adaptive radiotherapy workflows.
+          <p class="timestamp">
+            Last updated: <!-- update manually when you change content --> November 19, 2025
           </p>
-          <p>
-            The phantom will emulate key pelvic structures and allow controlled motion and distortion
-            experiments, enabling quantitative evaluation of image quality, registration accuracy, and
-            dose calculation.
-          </p>
-
-          <h3>Motivation</h3>
-          <ul>
-            <li>Non-uniform magnetic fields in MRI can cause spatial distortions.</li>
-            <li>Adaptive radiotherapy relies heavily on accurate MR imaging for planning and verification.</li>
-            <li>A standardized pelvic phantom helps benchmark MRI performance and test correction methods.</li>
-          </ul>
         </div>
-        <div>
-          <h3>Key Features</h3>
-          <div class="card">
-            <ul>
-              <li>MRI-compatible pelvic phantom geometry.</li>
-              <li>Embedded structures representing organs and soft tissue.</li>
-              <li>Capability to introduce controlled motion and deformation.</li>
-              <li>Imaging pipeline for distortion quantification and correction.</li>
-            </ul>
 
-            <div class="chip-row">
-              <span class="chip">MRI physics</span>
-              <span class="chip">Medical imaging</span>
-              <span class="chip">Signal processing</span>
-              <span class="chip">Software &amp; hardware integration</span>
+        <div class="hero-meta">
+          <div class="meta-card">
+            <div class="meta-label">Student Team</div>
+            <div class="meta-content">
+              <!-- Names ordered alphabetically by last name -->
+              <strong>Shahd Darwish</strong><br />
+              <strong>Sara El-Sallabi</strong><br />
+              <strong>Abdullah Feroun</strong><br />
+              <strong>Hazem Kasem</strong>
+            </div>
+          </div>
+
+          <div class="meta-card">
+            <div class="meta-label">Mentors</div>
+            <div class="meta-content">
+              <strong>Dr. Othmane Bouhali</strong> – TAMUQ<br />
+              <strong>Dr. Tarraf Torfeh</strong> – HMC
+            </div>
+          </div>
+
+          <div class="meta-card">
+            <div class="meta-label">Sponsors</div>
+            <div class="meta-content">
+              <div class="sponsor-row">
+                <span class="sponsor-tag">Hamad Medical Corporation (HMC)</span>
+                <span class="sponsor-tag">National Center for Cancer Care &amp; Research (NCCCR)</span>
+              </div>
             </div>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- TEAM SECTION -->
+    <!-- ===== OVERVIEW ===== -->
+    <section id="overview">
+      <h2>Project Overview</h2>
+      <div class="grid-2">
+        <div class="card">
+          <h3>Objective</h3>
+          <p>
+            Our objective is to design, build, and validate an MRI-compatible pelvic phantom
+            that can be used to characterise geometric distortion and motion effects in MRI-based
+            adaptive radiotherapy.
+          </p>
+          <p>
+            The phantom will include clinically relevant structures and landmarks with known
+            ground-truth geometry so that distortion can be measured quantitatively and used to
+            evaluate correction algorithms.
+          </p>
+
+          <h3 style="margin-top:0.9rem;">Motivation</h3>
+          <ul>
+            <li>Non-uniform magnetic fields, gradient nonlinearities, and susceptibility effects can distort MR images.</li>
+            <li>Adaptive radiotherapy workflows depend on high-fidelity MRI for target localization and dose calculation.</li>
+            <li>A standardized pelvic phantom enables repeatable experiments, quality assurance, and benchmarking of software tools.</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <h3>Key Design Themes</h3>
+          <ul>
+            <li>Realistic pelvic anatomy with MRI-compatible materials.</li>
+            <li>Modular design allowing different organ configurations and motion scenarios.</li>
+            <li>Integrated workflow from data acquisition to distortion metrics and correction.</li>
+            <li>Close collaboration with medical physicists at HMC and NCCCR.</li>
+          </ul>
+
+          <div class="chip-row">
+            <span class="chip">Medical imaging</span>
+            <span class="chip">MRI physics</span>
+            <span class="chip">CAD &amp; 3D printing</span>
+            <span class="chip">Signal &amp; image processing</span>
+            <span class="chip">Experimental validation</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== TEAM ===== -->
     <section id="team">
-      <h2>Team & Advisors</h2>
-      <div class="card">
-        <h3>Student Team</h3>
-        <ul>
-          <!-- Replace with actual names -->
-          <li><strong>Sara El-Sallabi</strong> – Electrical Engineering</li>
-          <li><strong>Team Member 2</strong> – Role / Major</li>
-          <li><strong>Team Member 3</strong> – Role / Major</li>
-          <li><strong>Team Member 4</strong> – Role / Major</li>
-        </ul>
+      <h2>Team & Roles</h2>
+      <div class="grid-2">
+        <div class="card">
+          <h3>Student Team</h3>
+          <ul>
+            <li><strong>Shahd Darwish</strong> – Clinical coordination, requirements, and QA workflow mapping.</li>
+            <li><strong>Sara El-Sallabi</strong> – System integration, MRI distortion modelling, and software development.</li>
+            <li><strong>Abdullah Feroun</strong> – Mechanical design, CAD modelling, and 3D-printing workflow.</li>
+            <li><strong>Hazem Kasem</strong> – Experimental setup, data acquisition, and analysis automation.</li>
+          </ul>
+        </div>
 
-        <h3>Faculty Advisors</h3>
+        <div class="card">
+          <h3>Mentors & Sponsors</h3>
+          <p class="muted">
+            Our project is jointly supervised by faculty and clinical experts and is
+            closely tied to real clinical needs in Qatar.
+          </p>
+          <ul>
+            <li><strong>Dr. Othmane Bouhali</strong> – Faculty mentor, TAMUQ.</li>
+            <li><strong>Dr. Tarraf Torfeh</strong> – Clinical mentor, HMC / NCCCR.</li>
+          </ul>
+          <p style="margin-top:0.5rem;">
+            Sponsored by:
+          </p>
+          <ul>
+            <li>Hamad Medical Corporation (HMC).</li>
+            <li>National Center for Cancer Care &amp; Research (NCCCR).</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== PHANTOM DESIGN ===== -->
+    <section id="phantom-design">
+      <h2>Phantom Design & Hardware</h2>
+      <div class="grid-2">
+        <div class="card">
+          <h3>Geometry & Anatomy</h3>
+          <ul>
+            <li>Pelvic bone shell derived from anatomical references (CT/MR datasets or literature models).</li>
+            <li>Internal compartments representing bladder, rectum, target volumes, and surrounding soft tissue.</li>
+            <li>Embedded fiducial markers and grid patterns for precise distortion tracking.</li>
+            <li>Provision for inserting different inserts (e.g., different tissue-mimicking materials).</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <h3>Materials & Manufacturing</h3>
+          <ul>
+            <li>MRI-compatible materials with controlled relaxation properties (T1/T2) where possible.</li>
+            <li>3D-printed structures with sealed volumes for liquid or gel filling.</li>
+            <li>Modular assembly to simplify cleaning, refilling, and future upgrades.</li>
+            <li>Design constraints informed by scanner bore size and clinical workflow at NCCCR.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="card" style="margin-top:1rem;">
+        <h3>Motion & Scenario Modules</h3>
+        <p>
+          To support adaptive workflows, the phantom is planned with optional motion modules:
+        </p>
         <ul>
-          <!-- Replace with actual names -->
-          <li><strong>Advisor 1</strong>, Title – Department</li>
-          <li><strong>Advisor 2</strong>, Title – Department</li>
+          <li>Simple translation and rotation stages to simulate patient setup shifts.</li>
+          <li>Breathing-like or organ-motion inserts (where feasible) for dynamic studies.</li>
+          <li>Repeatable reference positions to enable before/after comparison across scans.</li>
         </ul>
       </div>
     </section>
 
-    <!-- DESIGN / TECHNICAL SECTION -->
-    <section id="design">
-      <h2>System Design</h2>
+    <!-- ===== SOFTWARE / DISTORTION ===== -->
+    <section id="software">
+      <h2>Distortion Analysis & Correction Software</h2>
+      <div class="grid-2">
+        <div class="card">
+          <h3>Image Processing Pipeline</h3>
+          <ul>
+            <li>Acquisition of phantom MR images under different sequences and scanner settings.</li>
+            <li>Segmentation / registration of known structures and fiducials.</li>
+            <li>Computation of displacement fields by comparing measured positions to ground-truth geometry.</li>
+            <li>Generation of distortion heatmaps and quantitative metrics (e.g., maximum displacement, RMS error).</li>
+          </ul>
+        </div>
 
-      <h3>Hardware & Phantom Design</h3>
-      <div class="card">
-        <ul>
-          <li>Pelvic phantom geometry based on anatomical references.</li>
-          <li>3D-printed components with MRI-compatible materials.</li>
-          <li>Internal structures representing bone, soft tissue, and target volumes.</li>
-          <li>Motion module to simulate patient movement or organ motion (if applicable).</li>
-        </ul>
+        <div class="card">
+          <h3>Correction Strategies</h3>
+          <ul>
+            <li>Exploring scanner-provided corrections vs. custom post-processing.</li>
+            <li>Testing geometry-based warping methods to “undo” measured distortions.</li>
+            <li>Evaluating impact of correction on target localization and dose mapping.</li>
+            <li>Preparing a report framework that can be reused by clinical physicists for QA.</li>
+          </ul>
+          <p class="section-note">
+            Implementation tools may include Python (NumPy, SciPy, SimpleITK), MATLAB, or
+            other image-processing environments allowed by the course and clinical partners.
+          </p>
+        </div>
       </div>
+    </section>
 
-      <h3>Software & Image Processing</h3>
+    <!-- ===== VALIDATION ===== -->
+    <section id="validation">
+      <h2>Validation & Evaluation Plan</h2>
       <div class="card">
+        <h3>Planned Experiments</h3>
         <ul>
-          <li>Acquisition of MR images under controlled conditions.</li>
-          <li>Quantification of geometric distortion using known phantom geometry.</li>
-          <li>Implementation and testing of distortion correction algorithms.</li>
-          <li>Comparison of pre- and post-correction images using quantitative metrics.</li>
+          <li>Baseline scans on the target MRI system(s) at NCCCR with multiple sequences (T1, T2, distortion-sensitive protocols).</li>
+          <li>Comparison between vendor distortion correction options and our custom analysis pipeline.</li>
+          <li>Reproducibility studies: repeated scans with controlled setup changes.</li>
+          <li>Sensitivity analysis: how distortion varies with sequence parameters and phantom position.</li>
         </ul>
-      </div>
 
-      <h3>Deliverables</h3>
-      <div class="card">
+        <h3 style="margin-top:0.8rem;">Evaluation Metrics</h3>
         <ul>
-          <li>Functional MRI pelvic phantom.</li>
-          <li>Documentation of design, materials, and fabrication steps.</li>
-          <li>Image processing scripts / software for distortion analysis and correction.</li>
-          <li>Interim and final presentations and written reports.</li>
+          <li>Maximum geometric error across the imaging volume.</li>
+          <li>Mean and RMS distortion within regions of interest.</li>
+          <li>Effect of distortion on target contour alignment and dose grid mapping (where available).</li>
+          <li>Qualitative feedback from medical physicists at HMC/NCCCR.</li>
         </ul>
       </div>
     </section>
 
-    <!-- DOCUMENTS SECTION: PRESENTATIONS, REPORTS, MEETING MINUTES -->
+    <!-- ===== DOCUMENTS ===== -->
     <section id="documents">
-      <h2>Documents</h2>
+      <h2>Project Documents</h2>
       <p class="muted">
-        This section is updated throughout the semester with links to all presentations,
-        reports, and meeting minutes, as required by the ECEN 403 website rubric.
+        This section will be updated throughout the year with all required ECEN 403 artefacts:
+        presentations, reports, and meeting minutes.
       </p>
 
-      <!-- PRESENTATIONS -->
-      <h3>Presentations</h3>
-      <table>
-        <thead>
-          <tr>
-            <th>Date</th>
-            <th>Presentation</th>
-            <th>Link</th>
-          </tr>
-        </thead>
-        <tbody>
-          <!-- Update rows as you create new presentations -->
-          <tr>
-            <td>Sep 15, 2025</td>
-            <td>Initial Project Proposal Presentation</td>
-            <td><a class="doc-link" href="docs/presentations/proposal_presentation.pdf" target="_blank">View PDF</a></td>
-          </tr>
-          <tr>
-            <td>Nov 10, 2025</td>
-            <td>Midterm Design Review</td>
-            <td><a class="doc-link" href="docs/presentations/midterm_design_review.pdf" target="_blank">View PDF</a></td>
-          </tr>
-          <!-- Add more rows here -->
-        </tbody>
-      </table>
+      <!-- Presentations -->
+      <div class="card" style="margin-top:1rem;">
+        <h3>Presentations</h3>
+        <table>
+          <thead>
+            <tr>
+              <th>Date</th>
+              <th>Presentation</th>
+              <th>Link</th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- Example rows – update with real files & dates -->
+            <tr>
+              <td>Sep 15, 2025</td>
+              <td>Initial Project Proposal</td>
+              <td><a class="doc-link" href="docs/presentations/proposal_presentation.pdf" target="_blank">View PDF</a></td>
+            </tr>
+            <tr>
+              <td>Nov 10, 2025</td>
+              <td>Midterm Design Review</td>
+              <td><a class="doc-link" href="docs/presentations/midterm_design_review.pdf" target="_blank">View PDF</a></td>
+            </tr>
+            <!-- Add new rows as you create more presentations -->
+          </tbody>
+        </table>
+      </div>
 
-      <!-- REPORTS -->
-      <h3>Reports</h3>
-      <table>
-        <thead>
-          <tr>
-            <th>Date</th>
-            <th>Report</th>
-            <th>Link</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>Oct 01, 2025</td>
-            <td>ConOps / Requirements Report</td>
-            <td><a class="doc-link" href="docs/reports/conops_report.pdf" target="_blank">View PDF</a></td>
-          </tr>
-          <tr>
-            <td>Dec 05, 2025</td>
-            <td>Detailed Design Report</td>
-            <td><a class="doc-link" href="docs/reports/design_report.pdf" target="_blank">View PDF</a></td>
-          </tr>
-          <!-- Add more rows here -->
-        </tbody>
-      </table>
+      <!-- Reports -->
+      <div class="card" style="margin-top:1rem;">
+        <h3>Reports</h3>
+        <table>
+          <thead>
+            <tr>
+              <th>Date</th>
+              <th>Report</th>
+              <th>Link</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Oct 01, 2025</td>
+              <td>Concept of Operations &amp; Requirements Report</td>
+              <td><a class="doc-link" href="docs/reports/conops_report.pdf" target="_blank">View PDF</a></td>
+            </tr>
+            <tr>
+              <td>Dec 05, 2025</td>
+              <td>Detailed Design Report</td>
+              <td><a class="doc-link" href="docs/reports/design_report.pdf" target="_blank">View PDF</a></td>
+            </tr>
+            <!-- Add rows for final report, user manual, etc. -->
+          </tbody>
+        </table>
+      </div>
 
-      <!-- MEETING MINUTES -->
-      <h3>Meeting Minutes</h3>
-      <table>
-        <thead>
-          <tr>
-            <th>Date</th>
-            <th>Meeting</th>
-            <th>Link</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>Sep 08, 2025</td>
-            <td>Kickoff Meeting with Advisor</td>
-            <td><a class="doc-link" href="docs/minutes/2025-09-08_kickoff_minutes.pdf" target="_blank">View PDF</a></td>
-          </tr>
-          <tr>
-            <td>Sep 22, 2025</td>
-            <td>Phantom Design Discussion</td>
-            <td><a class="doc-link" href="docs/minutes/2025-09-22_design_minutes.pdf" target="_blank">View PDF</a></td>
-          </tr>
-          <!-- Add a new row for each meeting -->
-        </tbody>
-      </table>
-
-      <p class="updated">
-        Tip: Every time you upload a new presentation/report/meeting minutes, add a new row to the
-        appropriate table and update this section. That directly satisfies the “frequently updated” part
-        of the rubric.
-      </p>
-    </section>
-
-    <!-- TIMELINE / UPDATES SECTION -->
-    <section id="timeline">
-      <h2>Timeline & Weekly Updates</h2>
-      <div class="card">
-        <h3>Major Milestones</h3>
-        <ul>
-          <li><strong>Week 2–4:</strong> Problem definition, requirements, and literature review.</li>
-          <li><strong>Week 5–8:</strong> Phantom geometry design and material selection.</li>
-          <li><strong>Week 9–12:</strong> Prototype fabrication and initial MRI scans.</li>
-          <li><strong>Week 13–15:</strong> Image processing pipeline and distortion analysis.</li>
-          <li><strong>End of semester:</strong> Final testing, documentation, and presentation.</li>
-        </ul>
-
-        <h3 style="margin-top:1rem;">Weekly Log (Example Entries)</h3>
-        <ul>
-          <li><strong>Week of Sep 15:</strong> Finalized high-level requirements and prepared proposal slides.</li>
-          <li><strong>Week of Sep 22:</strong> Drafted initial phantom geometry and discussed materials with advisor.</li>
-          <!-- Each week, add one bullet here describing what you did -->
-        </ul>
+      <!-- Meeting Minutes -->
+      <div class="card" style="margin-top:1rem;">
+        <h3>Meeting Minutes</h3>
+        <table>
+          <thead>
+            <tr>
+              <th>Date</th>
+              <th>Meeting</th>
+              <th>Link</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Sep 08, 2025</td>
+              <td>Kickoff Meeting with Mentors</td>
+              <td><a class="doc-link" href="docs/minutes/2025-09-08_kickoff_minutes.pdf" target="_blank">View PDF</a></td>
+            </tr>
+            <tr>
+              <td>Sep 22, 2025</td>
+              <td>Phantom Geometry &amp; Materials Discussion</td>
+              <td><a class="doc-link" href="docs/minutes/2025-09-22_design_minutes.pdf" target="_blank">View PDF</a></td>
+            </tr>
+            <!-- Keep adding rows as you hold new meetings -->
+          </tbody>
+        </table>
+        <p class="section-note">
+          After each meeting, upload the minutes as a PDF and add a new row here to keep the site
+          current and aligned with the course rubric.
+        </p>
       </div>
     </section>
 
+    <!-- ===== TIMELINE ===== -->
+    <section id="timeline">
+      <h2>Timeline & Weekly Progress</h2>
+      <div class="grid-2">
+        <div class="card">
+          <h3>Major Milestones</h3>
+          <div class="timeline">
+            <div class="timeline-item">
+              <div class="timeline-dot"></div>
+              <div class="timeline-label">Weeks 1–4</div>
+              <p>Literature review, requirements definition, initial clinical discussions with HMC / NCCCR.</p>
+            </div>
+            <div class="timeline-item">
+              <div class="timeline-dot"></div>
+              <div class="timeline-label">Weeks 5–8</div>
+              <p>Phantom geometry design, material selection, and initial CAD models.</p>
+            </div>
+            <div class="timeline-item">
+              <div class="timeline-dot"></div>
+              <div class="timeline-label">Weeks 9–12</div>
+              <p>Prototype fabrication, assembly, and first MRI scans.</p>
+            </div>
+            <div class="timeline-item">
+              <div class="timeline-dot"></div>
+              <div class="timeline-label">Weeks 13–15</div>
+              <p>Distortion analysis, correction software development, and iteration with mentors.</p>
+            </div>
+            <div class="timeline-item">
+              <div class="timeline-dot"></div>
+              <div class="timeline-label">Final Weeks</div>
+              <p>Comprehensive validation, final documentation, and capstone presentation.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3>Weekly Log (examples)</h3>
+          <ul>
+            <li><strong>Week of Sep 15:</strong> Finalized project scope and prepared proposal presentation.</li>
+            <li><strong>Week of Sep 22:</strong> Drafted first version of pelvic geometry and discussed constraints with mentors.</li>
+            <!-- Each week, add one bullet to show continuous progress -->
+          </ul>
+          <p class="section-note">
+            You can keep updating this log so that anyone visiting the site sees the evolution of the project.
+          </p>
+        </div>
+      </div>
+    </section>
   </main>
 
   <footer>
-    ECEN 403 Senior Design · MRI Pelvic Phantom for Adaptive Radiotherapy · Texas A&amp;M University at Qatar
+    MRI Pelvic Phantom for Adaptive Radiotherapy · ECEN 403 Senior Design · Texas A&amp;M University at Qatar
   </footer>
 
 </body>
